@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:newchatapp/screens/HomeScreen.dart';
 
 import '../../main.dart';
 
@@ -11,6 +12,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isAnimate = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        _isAnimate = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
@@ -21,10 +34,11 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: Stack(
         children: [
-          Positioned(
+          AnimatedPositioned(
+            duration: Duration(seconds: 1),
             top: mq.height * .15,
             width: mq.width * .5,
-            left: mq.width * .25,
+            right: _isAnimate ? mq.width * .25 : -mq.width * .5,
             child: Image.asset(
               "images/icon.png",
             ),
@@ -40,8 +54,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: StadiumBorder(),
                 elevation: 1,
               ),
-              onPressed: () {},
-              icon: Image.asset("images/google.png",height: mq.height * .06),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+              },
+              icon: Image.asset(
+                "images/google.png",
+                height: mq.height * .06,
+              ),
               label: RichText(
                 text: TextSpan(
                     style: TextStyle(
@@ -53,11 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         text: "Sign In With ",
                       ),
                       TextSpan(
-                        text: "Google",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                        )
-                      ),
+                          text: "Google",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                          )),
                     ]),
               ),
             ),
