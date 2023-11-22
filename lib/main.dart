@@ -1,11 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:newchatapp/screens/HomeScreen.dart';
 import 'package:newchatapp/screens/auth/LoginScreen.dart';
 
+import 'firebase_options.dart';
+
 late Size mq;
 
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
