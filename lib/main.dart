@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:newchatapp/screens/HomeScreen.dart';
+import 'package:newchatapp/screens/SplashScreen.dart';
 import 'package:newchatapp/screens/auth/LoginScreen.dart';
 
 import 'firebase_options.dart';
@@ -9,7 +10,7 @@ late Size mq;
 
 
 void main() async{
-  WidgetsFlutterBinding();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }
